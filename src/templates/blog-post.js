@@ -4,6 +4,7 @@ import { Helmet } from 'react-helmet'
 import get from 'lodash/get'
 import Img from 'gatsby-image'
 import Layout from '../components/layout'
+import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 
 import heroStyles from '../components/hero.module.css'
 
@@ -32,11 +33,7 @@ class BlogPostTemplate extends React.Component {
             >
               {post.date}
             </p>
-            <div
-              dangerouslySetInnerHTML={{
-                __html: post.content.childMarkdownRemark.html,
-              }}
-            />
+              {documentToReactComponents(post.body.json)}
           </div>
         </div>
       </Layout>
@@ -61,10 +58,8 @@ export const pageQuery = graphql`
           ...GatsbyContentfulFluid_tracedSVG
         }
       }
-      content {
-        childMarkdownRemark {
-          html
-        }
+      body {
+        json
       }
     }
   }
