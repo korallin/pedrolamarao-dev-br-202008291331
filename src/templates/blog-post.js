@@ -9,7 +9,7 @@ import heroStyles from '../components/hero.module.css'
 
 class BlogPostTemplate extends React.Component {
   render() {
-    const post = get(this.props, 'data.contentfulBlogPost')
+    const post = get(this.props, 'data.contentfulPost')
     const siteTitle = get(this.props, 'data.site.siteMetadata.title')
 
     return (
@@ -20,7 +20,7 @@ class BlogPostTemplate extends React.Component {
             <Img
               className={heroStyles.heroImage}
               alt={post.title}
-              fluid={post.heroImage.fluid}
+              fluid={post.picture.fluid}
             />
           </div>
           <div className="wrapper">
@@ -30,11 +30,11 @@ class BlogPostTemplate extends React.Component {
                 display: 'block',
               }}
             >
-              {post.publishDate}
+              {post.date}
             </p>
             <div
               dangerouslySetInnerHTML={{
-                __html: post.body.childMarkdownRemark.html,
+                __html: post.content.childMarkdownRemark.html,
               }}
             />
           </div>
@@ -47,21 +47,21 @@ class BlogPostTemplate extends React.Component {
 export default BlogPostTemplate
 
 export const pageQuery = graphql`
-  query BlogPostBySlug($slug: String!) {
+  query PostBySlug($slug: String!) {
     site {
       siteMetadata {
         title
       }
     }
-    contentfulBlogPost(slug: { eq: $slug }) {
+    contentfulPost(slug: { eq: $slug }) {
       title
-      publishDate(formatString: "MMMM Do, YYYY")
-      heroImage {
+      date(formatString: "MMMM Do, YYYY")
+      picture {
         fluid(maxWidth: 1180, background: "rgb:000000") {
           ...GatsbyContentfulFluid_tracedSVG
         }
       }
-      body {
+      content {
         childMarkdownRemark {
           html
         }
