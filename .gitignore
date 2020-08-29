@@ -67,4 +67,7 @@ public
 .contentful.json
 .env*
 !.env.example
-/.gradle/
+
+.project
+.gradle
+.settings
