@@ -49,7 +49,7 @@ export const pageQuery = graphql`
         node {
           title
           slug
-          date(formatString: "MMMM Do, YYYY")
+          date(formatString: "YYYY-MM-DD")
           tags
           picture {
             fluid(maxWidth: 350, maxHeight: 196, resizingBehavior: SCALE) {

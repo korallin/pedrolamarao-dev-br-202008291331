@@ -55,7 +55,7 @@ export const pageQuery = graphql`
     }
     contentfulPost(slug: { eq: $slug }) {
       title
-      date(formatString: "MMMM Do, YYYY")
+      date(formatString: "YYYY-MM-DD")
       picture {
         fluid(maxWidth: 1180, background: "rgb:000000") {
           ...GatsbyContentfulFluid_tracedSVG
